@@ -1,11 +1,10 @@
 module.exports = function (grunt) {
 
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'uglify', 'karma']);
+    grunt.registerTask('default', ['jshint', 'uglify']);
 
     var testConfig = function(configFile, customOptions) {
         var options = { configFile: configFile, keepalive: true };
@@ -16,11 +15,6 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        karma: {
-            unit: {
-                options: testConfig('test/test.conf.js')
-            }
-        },
         jshint:{
             files:['src/timepickerdirective.js', 'test/**/*.js'],
             options:{
