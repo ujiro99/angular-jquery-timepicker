@@ -94,13 +94,11 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
             };
 
             if (element.is('input')) {
-                ngModel.$parsers.unshift(function(viewValue) {
+                ngModel.$parsers.unshift(function() {
                     var date = element.timepicker('getTime', asDate());
+                    ngModel.$setValidity('time', date !== null);
                     return date ? asMomentOrDate(date) : date;
                 });
-                ngModel.$validators.time = function(modelValue) {
-                    return (!attrs.required && !userInput()) ? true : isDateOrMoment(modelValue);
-                };
             } else {
                 element.on('changeTime', function() {
                     scope.$evalAsync(function() {
